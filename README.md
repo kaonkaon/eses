@@ -56,7 +56,7 @@ chmod +x /usr/local/bin/eses
 open your favorite text editor
 write the entire thing
 save
-put it in random number
+put it in random folder
 ```
 ## Contribute
 please contribute something, even adding comment is appreciated

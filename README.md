@@ -42,7 +42,6 @@ just copy it to executable path and make it executable and boom
 wget https://raw.githubusercontent.com/kaonkaon/eses/main/eses
 sudo mv eses /usr/local/bin/
 chmod +x /usr/local/bin/eses
-
 ```
 ##### Using Clone (on /usr/local/bin)
 ```

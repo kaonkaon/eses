@@ -34,4 +34,30 @@ All of the configuration are on the script with the description (should i descri
 * notify-send
 ```
 
-WIP
+### Install
+just copy it to executable path and make it executable and boom 
+
+##### Using WGET (on /usr/local/bin)
+```
+wget https://raw.githubusercontent.com/kaonkaon/eses/main/eses
+sudo mv eses /usr/local/bin/
+chmod +x /usr/local/bin/eses
+
+```
+##### Using Clone (on /usr/local/bin)
+```
+cd /tmp
+git clone https://github.com/kaonkaon/eses.git
+cd eses
+sudo mv eses /usr/local/bin/
+chmod +x /usr/local/bin/eses
+```
+##### Rewrite the thing (when Copy Paste is bloat)
+```
+open your favorite text editor
+write the entire thing
+save
+put it in random number
+```
+## Contribute
+please contribute something, even adding comment is appreciated

@@ -1,0 +1,74 @@
+#!/usr/bin/zsh
+
+# Configuration
+	
+	# Notification title when screenshot succesfully saved
+	succ_noTit="カシャ！"
+	
+	# Notification text when screenshot successfully saved
+	succ_noTex="スクショを保存したよ！"
+	
+	# Notification text when screenshot successfully saved
+	succ_noTex_cp="スクショをクリップボードに貼ったよ！"
+
+	# Notification title when QR Scanned and copied
+	succ_noTit_sccop="QRコードスキャン結果"
+
+	# Prompt dialog title when qr code scanned
+	dia_tit="Question"
+
+	# Prompt dialog text when qr code scanned
+	dia_tex="QRコードが確認されました、スキャン済みです\nスキャン内容をコピーしますか？"
+
+	# Prompt dialog copy image button
+	dia_imgcop_butt="画像をコピー"
+
+	# Prompt dialog copy image button
+	dia_sccop_butt="スキャン内容をコピー"
+	
+	# Screenshot save dir
+	sv_dir="/home/$USER/Pictures/"
+	
+	# Screenshot file name
+	sv_name="$(date)"
+
+# Code
+
+alias ss='maim --hidecursor'
+
+case "$1" in
+	--select)
+		ss --select "$sv_dir$sv_name"
+		notify-send "$succ_noTit" "$succ_noTex"
+		;;
+	--whole)
+		ss "$sv_dir$sv_name"
+		notify-send "$succ_noTit" "$succ_noTex"
+		;;
+	--whole_cp)
+		ss | xclip -selection clipboard -t image/png
+		notify-send "$succ_noTit" "$succ_noTex_cp"
+		;;
+	--select_cp)
+		tmp_file="/tmp/qr.png"
+
+		# maimselect > "$tmp_file"
+		ss --select "$tmp_file"
+		scanresult=$(zbarimg --quiet --raw "$tmp_file" | tr -d '\n')
+
+		if [ -z "$scanresult" ]; then
+			xclip -selection clipboard -t image/png $tmp_file
+			notify-send "$succ_noTit" "$succ_noTex_cp"
+		else
+			ask=$(zenity --question --text="$dia_tex" --title="$dia_tit" --icon-name=info --no-wrap --ok-label="$dia_sccop_butt" --cancel-label="$dia_imgcop_butt" --ellipsize)
+			if [ $? = "0" ]; then
+				echo "$scanresult" | xclip -selection clipboard -filter
+				convert $tmp_file -resize 75x75 "$tmp_file"
+				notify-send -i "$tmp_file" "$succ_noTit_sccop" "$scanresult"
+			elif [ $? = "1" ]; then
+				xclip -selection clipboard -t image/png $tmp_file
+				notify-send "$succ_noTit" "$succ_noTex_cp"
+			fi
+		fi
+		;;
+esac	

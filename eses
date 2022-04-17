@@ -3,7 +3,7 @@
 ## Configuration, will be overrided by config file
 	
 # Notification title when maim --hidecursor successfully saved
-succ_noTit="Ka-Chik!"
+succ_noTit="Kasha!"
 
 # Notification text when maim --hidecursor successfully saved
 succ_noTex="Screenshot saved!"

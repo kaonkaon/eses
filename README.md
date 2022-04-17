@@ -74,6 +74,11 @@ sudo mandb
 ```
 After that, you can use `man eses` to view the man page.
 
+#### Config File
+upon first run, the config file will be generated under `/home/$USER/.config/eses/`
+
+script will automatically generate the directory and config file with default configuration inside if theres no config directory and/or config file. no worry i get you 
+
 
 ## Contribute
 please contribute something, even adding comment is appreciated

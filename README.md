@@ -58,5 +58,16 @@ write the entire thing
 save
 put it in random folder
 ```
+
+#### Building the man page
+`eses.1.md` is just a markdown file, feel free to edit it to your liking and then, while in the `man` folder run;
+```
+pandoc eses.1.md -s -t man -o eses.1	
+gzip eses.1 -c > eses.1.gz
+```
+then the generated `eses.1.gz` file can be installed in `/usr/local/man/man1`  
+After that, you can use `man eses` to view the man page.
+
+
 ## Contribute
 please contribute something, even adding comment is appreciated

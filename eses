@@ -1,59 +1,75 @@
-#!/bin/sh
+#!/bin/bash
 
-# Configuration
+## Configuration, will be overrided by config file
 	
-	# Notification title when screenshot succesfully saved
-	succ_noTit="カシャ！"
-	
-	# Notification text when screenshot successfully saved
-	succ_noTex="スクショを保存したよ！"
-	
-	# Notification text when screenshot successfully saved
-	succ_noTex_cp="スクショをクリップボードに貼ったよ！"
+# Notification title when maim --hidecursor successfully saved
+succ_noTit="Ka-Chik!"
 
-	# Notification title when QR Scanned and copied
-	succ_noTit_sccop="QRコードスキャン結果"
+# Notification text when maim --hidecursor successfully saved
+succ_noTex="Screenshot saved!"
 
-	# Prompt dialog title when qr code scanned
-	dia_tit="Question"
+# Notification text when maim --hidecursor successfully saved
+succ_noTex_cp="Screenshot copied to clipboard!"
 
-	# Prompt dialog text when qr code scanned
-	dia_tex="QRコードが確認されました、スキャン済みです\nスキャン内容をコピーしますか？"
+# Notification title when QR Scanned and copied
+succ_noTit_sccop="QR Code scan result"
 
-	# Prompt dialog copy image button
-	dia_imgcop_butt="画像をコピー"
+# Prompt dialog title when qr code scanned
+dia_tit="Prompt"
 
-	# Prompt dialog copy image button
-	dia_sccop_butt="スキャン内容をコピー"
-	
-	# Screenshot save dir
-	sv_dir="/home/$USER/Pictures/"
-	
-	# Screenshot file name
-	sv_name="$(date)"
+# Prompt dialog text when qr code scanned
+dia_tex="QR Code detected, and sucessfully scanned\n Do you want to copy the scan result instead?"
 
-# Code
+# Prompt dialog copy image button
+dia_imgcop_butt="Copy image"
 
-alias ss='maim --hidecursor'
+# Prompt dialog copy image button
+dia_sccop_butt="Copy scan result"
+
+# maim --hidecursor save dir
+sv_dir="/home/$USER/Pictures/"
+
+# maim --hidecursor file name
+sv_name="$(date)"
+
+## Overriding Config file (will auto make them)
+
+	con_dir=/home/$USER/.config/eses
+	con_file=/home/$USER/.config/eses/config
+
+	if [ -d "$con_dir" ]; then
+		test -f "$con_file" || sed -n "5, 33p" eses-sharp > $con_file
+	else
+		mkdir $con_dir
+		sed -n "5, 33p" eses-sharp > $con_file
+	fi
+
+	source $con_file
+
+## Making sure save directory is exist
+
+	test -d "$sv_dir" || mkdir $sv_dir
+
+## Code
 
 case "$1" in
 	--select)
-		ss --select "$sv_dir$sv_name"
+		maim --hidecursor --select "$sv_dir$sv_name"
 		notify-send "$succ_noTit" "$succ_noTex"
 		;;
 	--whole)
-		ss "$sv_dir$sv_name"
+		maim --hidecursor "$sv_dir$sv_name"
 		notify-send "$succ_noTit" "$succ_noTex"
 		;;
 	--whole_cp)
-		ss | xclip -selection clipboard -t image/png
+		maim --hidecursor | xclip -selection clipboard -t image/png
 		notify-send "$succ_noTit" "$succ_noTex_cp"
 		;;
 	--select_cp)
 		tmp_file="/tmp/qr.png"
 
 		# maimselect > "$tmp_file"
-		ss --select "$tmp_file"
+		maim --hidecursor --select "$tmp_file"
 		scanresult=$(zbarimg --quiet --raw "$tmp_file" | tr -d '\n')
 
 		if [ -z "$scanresult" ]; then

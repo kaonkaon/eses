@@ -17,7 +17,7 @@ Basic screenshot script with QR Scanner feature (yes i wrote this twice). Good f
 * --select_cp
 	* Screenshot selected area / selected window, and put it on clipboard
 		* if theres QR Code detected in the pictures, it will try to scan the thing
-			* if its fail, it will put the screenshotted result in to clipboard
+			* if its fail, it will leave the screenshot copied on the clipboard
 			* if its success, user will be prompted to either copy the image or scanned result
 			 ![Dialog](https://github.com/kaonkaon/eses/blob/main/me%20when%20dialog.png?raw=true)
 			 

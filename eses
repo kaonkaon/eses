@@ -38,10 +38,10 @@ sv_name="$(date)"
 	con_file=/home/$USER/.config/eses/config
 
 	if [ -d "$con_dir" ]; then
-		test -f "$con_file" || sed -n "5, 33p" eses-sharp > $con_file
+		test -f "$con_file" || sed -n "5, 33p" eses > $con_file
 	else
 		mkdir $con_dir
-		sed -n "5, 33p" eses-sharp > $con_file
+		sed -n "5, 33p" eses > $con_file
 	fi
 
 	source $con_file

@@ -37,17 +37,18 @@ All of the configuration are on the script with the description (should i descri
 ### Install
 just copy it to executable path and make it executable and boom 
 
-##### Using WGET (on /usr/local/bin)
-```
-wget https://raw.githubusercontent.com/kaonkaon/eses/main/eses
-sudo mv eses /usr/local/bin/
-chmod +x /usr/local/bin/eses
-```
 ##### Using Clone (on /usr/local/bin)
 ```
 cd /tmp
 git clone https://github.com/kaonkaon/eses.git
 cd eses
+sudo mv eses /usr/local/bin/
+chmod +x /usr/local/bin/eses
+```
+##### Using WGET (on /usr/local/bin)
+> man page not included, download it yourself
+```
+wget https://raw.githubusercontent.com/kaonkaon/eses/main/eses
 sudo mv eses /usr/local/bin/
 chmod +x /usr/local/bin/eses
 ```
@@ -73,6 +74,11 @@ sudo mv eses.1.gz
 sudo mandb
 ```
 After that, you can use `man eses` to view the man page.
+
+#### Config File
+upon first run, the config file will be generated under `/home/$USER/.config/eses/`
+
+script will automatically generate the directory and config file with default configuration inside if theres no config directory and/or config file. no worry i get you 
 
 
 ## Contribute

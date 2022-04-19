@@ -60,65 +60,86 @@ sv_name="$(date)"
 		whatDis=1;
 	fi
 
-	# it will be 0 if wayland and 1 if X11
-
-	# for test purpose, will delete later
-	echo $whatDis
-	
+	# it will be 0 if wayland and 1 if X11	
 
 ## Code
 
+function printHelp {
+printf 'Usage: eses-beta [OPTION]
+Screenshot script with QR Scanner feature
+	 
+There are four modes, selectable by the below options:
+  --select        Screenshot selected area / selected window, and save it as a file
+  --whole         Screenshot whole screen and save it as a file in your desired folder
+  --whole_cp      Screenshot whole screen and put it on clipboard without saving
+  --select_cp     Screenshot selected area / selected window, and put it on clipboard, then run QR code magic.
+
+    Also try looking at "man eses" for more documentation.
+'
+}
+
+
 if [ $whatDis = "0" ]; then
 	case "$1" in
+		--help)
+			printHelp
+			echo "    eses is currently running in Wayland mode."
+			;;
 		--select)
-  			grim -g "$(slurp)" "$sv_dir$sv_name"
-  			notify-send -t 1000 "$succ_noTit" "$succ_noTex"
-  			;;
- 		--whole)
-  			grim "$sv_dir$sv_name"
-  			notify-send -t 1000 "$succ_noTit" "$succ_noTex"
-  			;;
- 		--whole_cp)
-  			grim - | wl-copy -t image/png
-  			notify-send -t 1000 "$succ_noTit" "$succ_noTex_cp"
-  			;;
- 		--select_cp)
-  			tmp_file="/tmp/qr.png"
+			grim -g "$(slurp)" "$sv_dir$sv_name"
+			notify-send -a eses "$succ_noTit" "$succ_noTex"
+			;;
+		--whole)
+			grim "$sv_dir$sv_name"
+			notify-send -a eses "$succ_noTit" "$succ_noTex"
+			;;
+		--whole_cp)
+			grim - | wl-copy -t image/png
+			notify-send -a eses "$succ_noTit" "$succ_noTex_cp"
+			;;
+		--select_cp)
+			tmp_file="/tmp/qr.png"
 
-  			# maimselect > "$tmp_file"
-  			grim -g "$(slurp)" "$tmp_file"
-  			scanresult=$(zbarimg --quiet --raw "$tmp_file" | tr -d '\n')
+			# maimselect > "$tmp_file"
+			grim -g "$(slurp)" "$tmp_file"
+			scanresult=$(zbarimg --quiet --raw "$tmp_file" | tr -d '\n')
 
-  			if [ -z "$scanresult" ]; then
-   				wl-copy -t image/png < $tmp_file
-   				notify-send "$succ_noTit" "$succ_noTex_cp"
-  			else
-   				ask=$(zenity --question --text="$dia_tex" --title="$dia_tit" --icon-name=info --no-wrap --ok-label="$dia_sccop_butt" --cancel-label="$dia_imgcop_butt" --ellipsize)
-   				if [ $? = "0" ]; then
-    					echo "$scanresult" | wl-copy
-    					convert $tmp_file -resize 75x75 "$tmp_file"
-    					notify-send -i "$tmp_file" "$succ_noTit_sccop" "$scanresult"
-   				elif [ $? = "1" ]; then
-    					wl-copy -t image/png < $tmp_file
-    					notify-send -t 1000 "$succ_noTit" "$succ_noTex_cp"
-   				fi
-  			fi
-  			;;
+			if [ -z "$scanresult" ]; then
+				wl-copy -t image/png < $tmp_file
+				notify-send -a eses "$succ_noTit" "$succ_noTex_cp"
+			else
+				ask=$(zenity --question --text="$dia_tex" --title="$dia_tit" --icon-name=info \
+				--no-wrap --ok-label="$dia_sccop_butt" --cancel-label="$dia_imgcop_butt" --ellipsize)
+
+				if [ $? = "0" ]; then
+						echo "$scanresult" | wl-copy
+						convert $tmp_file -resize 75x75 "$tmp_file"
+						notify-send -a eses -i "$tmp_file" "$succ_noTit_sccop" "$scanresult"
+				elif [ $? = "1" ]; then
+						wl-copy -t image/png < $tmp_file
+						notify-send -a eses "$succ_noTit" "$succ_noTex_cp"
+				fi
+			fi
+			;;
 	esac
 
 elif [ $whatDis = "1" ]; then
 	case "$1" in
+		--help)
+			printHelp
+			echo '    eses is currently running in Xorg (x11) mode.'
+			;;
 		--select)
 			maim --hidecursor --select "$sv_dir$sv_name"
-			notify-send "$succ_noTit" "$succ_noTex"
+			notify-send -a eses "$succ_noTit" "$succ_noTex"
 			;;
 		--whole)
 			maim --hidecursor "$sv_dir$sv_name"
-			notify-send "$succ_noTit" "$succ_noTex"
+			notify-send -a eses "$succ_noTit" "$succ_noTex"
 			;;
 		--whole_cp)
 			maim --hidecursor | xclip -selection clipboard -t image/png
-			notify-send "$succ_noTit" "$succ_noTex_cp"
+			notify-send -a eses "$succ_noTit" "$succ_noTex_cp"
 			;;
 		--select_cp)
 			tmp_file="/tmp/qr.png"
@@ -129,16 +150,16 @@ elif [ $whatDis = "1" ]; then
 
 			if [ -z "$scanresult" ]; then
 				xclip -selection clipboard -t image/png $tmp_file
-				notify-send "$succ_noTit" "$succ_noTex_cp"
+				notify-send -a eses "$succ_noTit" "$succ_noTex_cp"
 			else
 				ask=$(zenity --question --text="$dia_tex" --title="$dia_tit" --icon-name=info --no-wrap --ok-label="$dia_sccop_butt" --cancel-label="$dia_imgcop_butt" --ellipsize)
 				if [ $? = "0" ]; then
 					echo "$scanresult" | xclip -selection clipboard -filter
 					convert $tmp_file -resize 75x75 "$tmp_file"
-					notify-send -i "$tmp_file" "$succ_noTit_sccop" "$scanresult"
+					notify-send -a eses -i "$tmp_file" "$succ_noTit_sccop" "$scanresult"
 				elif [ $? = "1" ]; then
 					xclip -selection clipboard -t image/png $tmp_file
-					notify-send "$succ_noTit" "$succ_noTex_cp"
+					notify-send -a eses "$succ_noTit" "$succ_noTex_cp"
 				fi
 			fi
 			;;

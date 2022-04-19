@@ -1,35 +1,35 @@
 #!/bin/bash
 
-## Configuration, will be overrided by config file
+## Configuration, will be overridden by config file
 	
-# Notification title when maim --hidecursor successfully saved
+# Notification title when a screenshot is saved to disk, or copied to clipboard
 succ_noTit="Kasha!"
 
-# Notification text when maim --hidecursor successfully saved
+# Notification text when a screenshot is captured, and saved to disk
 succ_noTex="Screenshot saved!"
 
-# Notification text when maim --hidecursor successfully saved
+# Notification text when a screenshot is captured, and copied to clipboard
 succ_noTex_cp="Screenshot copied to clipboard!"
 
-# Notification title when QR Scanned and copied
+# Notification title when a QR Code is scanned and copied to clipboard
 succ_noTit_sccop="QR Code scan result"
 
 # Prompt dialog title when qr code scanned
 dia_tit="Prompt"
 
 # Prompt dialog text when qr code scanned
-dia_tex="QR Code detected, and sucessfully scanned\n Do you want to copy the scan result instead?"
+dia_tex="QR Code detected, and sucessfully scanned.\n Do you want to copy the scan result instead?"
 
 # Prompt dialog copy image button
 dia_imgcop_butt="Copy image"
 
-# Prompt dialog copy image button
+# Prompt dialog copy scan result button
 dia_sccop_butt="Copy scan result"
 
-# maim --hidecursor save dir
+# Screenshot save dir
 sv_dir="/home/$USER/Pictures/"
 
-# maim --hidecursor file name
+# Screenshot file name
 sv_name="$(date)"
 
 ## Overriding Config file (will auto make them)

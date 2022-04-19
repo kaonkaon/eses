@@ -1,28 +1,61 @@
 # eses
-Screenshot scripts with QR Scanner feature (Forked from [u/LithiumFrost](https://www.reddit.com/r/unixporn/comments/p0md2y/oc_scan_a_qr_code_with_a_keyboard_shortcut/) [Codes](https://github.com/jayden-chan/dotfiles/blob/7f4ab0257604a52b3f5befe73cf21a5f95a19f54/scripts/screenshot.sh#L13))
+Screenshot script with QR Scanner feature (Forked from [u/LithiumFrost](https://www.reddit.com/r/unixporn/comments/p0md2y/oc_scan_a_qr_code_with_a_keyboard_shortcut/) [Codes](https://github.com/jayden-chan/dotfiles/blob/7f4ab0257604a52b3f5befe73cf21a5f95a19f54/scripts/screenshot.sh#L13))
 
 ### Name Meaning
 How you pronounce "SS"? yeah.
 
 ### Description
-Basic screenshot script with QR Scanner feature (yes i wrote this twice). Good for making a keybind for screenshots (you can use another decent apps/scripts, really)
+Basic screenshot script with QR Scanner feature (yes i wrote this twice). Good for making a keybind for screenshots (you can use another decent apps/scripts, really)  
+It should be noted that the cursor isn't included in screenshots.
 
 ### Function
 * --whole
-	* Screenshot whole screen (without cursor) and save it as a file in your desired folders (set it yourself by changing the scripts)
+	* Screenshot whole screen and save it as a file in your desired folders (set it yourself by changing the config)
 * --select
 	* Screenshot selected area / selected window, and save it as a file
 * --whole_cp
-	* Screenshot whole screen (without cursor) and put it on clipboard without saving (save your precious Kb in your HDD/SSD)
+	* Screenshot whole screen and put it on clipboard without saving (save the precious Kb on your HDD/SSD)
 * --select_cp
 	* Screenshot selected area / selected window, and put it on clipboard
-		* if theres QR Code detected in the pictures, it will try to scan the thing
-			* if its fail, it will leave the screenshot copied on the clipboard
-			* if its success, user will be prompted to either copy the image or scanned result
+		* if there's a QR Code detected in the pictures, it will try to scan it
+			* if it fails, it will leave the screenshot copied on the clipboard
+			* if it succeeds, user will be prompted to copy either the screenshot or scanned result
 			 ![Dialog](https://github.com/kaonkaon/eses/blob/main/me%20when%20dialog.png?raw=true)
 			 
 ### Configuration
-All of the configuration are on the script with the description (should i describe them again in here?)
+All of the default configuration is in the beginning of the eses script with plenty of comments, and it will likely change. As of writing this, the default config is:
+
+```
+# Notification title when maim --hidecursor successfully saved
+succ_noTit="Kasha!"
+
+# Notification text when maim --hidecursor successfully saved
+succ_noTex="Screenshot saved!"
+
+# Notification text when maim --hidecursor successfully saved
+succ_noTex_cp="Screenshot copied to clipboard!"
+
+# Notification title when QR Scanned and copied
+succ_noTit_sccop="QR Code scan result"
+
+# Prompt dialog title when qr code scanned
+dia_tit="Prompt"
+
+# Prompt dialog text when qr code scanned
+dia_tex="QR Code detected, and sucessfully scanned\n Do you want to copy the scan result instead?"
+
+# Prompt dialog copy image button
+dia_imgcop_butt="Copy image"
+
+# Prompt dialog copy image button
+dia_sccop_butt="Copy scan result"
+
+# maim --hidecursor save dir
+sv_dir="/home/$USER/Pictures/"
+
+# maim --hidecursor file name
+sv_name="$(date)"
+```
 
 ### Dependencies
 ```
@@ -70,7 +103,10 @@ gzip eses.1 -c > eses.1.gz
 ```
 then the generated `eses.1.gz` file can be installed in `/usr/local/man/man1`  
 ```
-sudo mv eses.1.gz 
+# Make /usr/local/man/man1 if it doesn't already exist
+sudo mkdir -p /usr/local/man/man1
+
+sudo mv eses.1.gz /usr/local/man/man1/
 sudo mandb
 ```
 After that, you can use `man eses` to view the man page.

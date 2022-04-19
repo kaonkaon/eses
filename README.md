@@ -14,7 +14,7 @@ How you pronounce "SS"? yeah. added `-beta` for beta version.
 Basic screenshot script with QR Scanner feature (yes i wrote this twice). Good for making a keybind for screenshots (you can use another decent apps/scripts, really)  
 It should be noted that the cursor isn't included in screenshots.
 
-added wayland support (big thanks to [WTecNinja](https://github.com/WTechNinja))
+added wayland support (big thanks to [WTechNinja](https://github.com/WTechNinja))
 
 ### Function
 * --whole

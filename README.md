@@ -14,7 +14,9 @@ How you pronounce "SS"? yeah. added `-beta` for beta version.
 Basic screenshot script with QR Scanner feature (yes i wrote this twice). Good for making a keybind for screenshots (you can use another decent apps/scripts, really)  
 It should be noted that the cursor isn't included in screenshots.
 
-added wayland support (big thanks to [WTechNinja](https://github.com/WTechNinja))
+#### milestones
+* added user config support (already merged to main)
+* added wayland support (big thanks to [WTechNinja](https://github.com/WTechNinja) ([jump to his repo](https://github.com/WTechNinja/eses/tree/eses-w)) ( the wayland support are belongs to WTechNinja )
 
 ### Function
 * --whole
@@ -138,4 +140,4 @@ script will automatically generate the directory and config file with default co
 
 
 ## Contribute
-please contribute something, even adding comment is appreciated
+please contribute something, even adding comment is appreciated.

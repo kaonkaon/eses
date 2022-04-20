@@ -4,7 +4,7 @@ Screenshot script with QR Scanner feature (Forked from [u/LithiumFrost](https://
 <h2><span style="color:red">!! BETA VERSION !!</span></h2>
 this is beta version, something is (maybe) broken and unstable and questionable
 
-this is for test purpose, please be carefull
+this is for test purpose, please be careful
 
 ---
 ### Name Meaning
@@ -14,7 +14,9 @@ How you pronounce "SS"? yeah. added `-beta` for beta version.
 Basic screenshot script with QR Scanner feature (yes i wrote this twice). Good for making a keybind for screenshots (you can use another decent apps/scripts, really)  
 It should be noted that the cursor isn't included in screenshots.
 
-added wayland support (big thanks to [WTecNinja](https://github.com/WTechNinja))
+#### milestones
+* added user config support (already merged to main)
+* added wayland support (big thanks to [WTechNinja](https://github.com/WTechNinja) ([jump to his repo](https://github.com/WTechNinja/eses/tree/eses-w)) ( the wayland support belongs to WTechNinja )
 
 ### Function
 * --whole
@@ -34,34 +36,34 @@ added wayland support (big thanks to [WTecNinja](https://github.com/WTechNinja))
 All of the default configuration is in the beginning of the eses script with plenty of comments, and it will likely change. As of writing this, the default config is:
 
 ```
-# Notification title when maim --hidecursor successfully saved
+# Notification title when a screenshot is saved to disk, or copied to clipboard
 succ_noTit="Kasha!"
 
-# Notification text when maim --hidecursor successfully saved
+# Notification text when a screenshot is captured, and saved to disk
 succ_noTex="Screenshot saved!"
 
-# Notification text when maim --hidecursor successfully saved
+# Notification text when a screenshot is captured, and copied to clipboard
 succ_noTex_cp="Screenshot copied to clipboard!"
 
-# Notification title when QR Scanned and copied
+# Notification title when a QR Code is scanned and copied to clipboard
 succ_noTit_sccop="QR Code scan result"
 
 # Prompt dialog title when qr code scanned
 dia_tit="Prompt"
 
 # Prompt dialog text when qr code scanned
-dia_tex="QR Code detected, and sucessfully scanned\n Do you want to copy the scan result instead?"
+dia_tex="QR Code detected, and sucessfully scanned.\n Do you want to copy the scan result instead?"
 
 # Prompt dialog copy image button
 dia_imgcop_butt="Copy image"
 
-# Prompt dialog copy image button
+# Prompt dialog copy scan result button
 dia_sccop_butt="Copy scan result"
 
-# maim --hidecursor save dir
+# Screenshot save dir
 sv_dir="/home/$USER/Pictures/"
 
-# maim --hidecursor file name
+# Screenshot file name
 sv_name="$(date)"
 ```
 
@@ -138,4 +140,4 @@ script will automatically generate the directory and config file with default co
 
 
 ## Contribute
-please contribute something, even adding comment is appreciated
+please contribute something, even adding comment is appreciated.

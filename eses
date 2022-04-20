@@ -34,14 +34,14 @@ sv_name="$(date)"
 
 ## Overriding Config file (will auto make them)
 
-	con_dir=/home/$USER/.config/eses-beta
-	con_file=/home/$USER/.config/eses-beta/config
+	con_dir=/home/$USER/.config/eses
+	con_file=/home/$USER/.config/eses/config
 
 	if [ -d "$con_dir" ]; then
-		test -f "$con_file" || sed -n "5, 33p" eses-beta > $con_file
+		test -f "$con_file" || sed -n "5, 33p" eses > $con_file
 	else
 		mkdir $con_dir
-		sed -n "5, 33p" eses-beta > $con_file
+		sed -n "5, 33p" eses > $con_file
 	fi
 
 	source $con_file
@@ -65,7 +65,7 @@ sv_name="$(date)"
 ## Code
 
 function printHelp {
-printf 'Usage: eses-beta [OPTION]
+printf 'Usage: eses [OPTION]
 Screenshot script with QR Scanner feature
 	 
 There are four modes, selectable by the below options:

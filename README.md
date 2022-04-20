@@ -1,4 +1,4 @@
-# eses-beta
+# eses (beta version)
 Screenshot script with QR Scanner feature (Forked from [u/LithiumFrost](https://www.reddit.com/r/unixporn/comments/p0md2y/oc_scan_a_qr_code_with_a_keyboard_shortcut/) [Codes](https://github.com/jayden-chan/dotfiles/blob/7f4ab0257604a52b3f5befe73cf21a5f95a19f54/scripts/screenshot.sh#L13)) (beta version)
 
 <h2><span style="color:red">!! BETA VERSION !!</span></h2>
@@ -8,7 +8,7 @@ this is for test purpose, please be careful
 
 ---
 ### Name Meaning
-How you pronounce "SS"? yeah. added `-beta` for beta version.
+How you pronounce "SS"? yeah. 
 
 ### Description
 Basic screenshot script with QR Scanner feature (yes i wrote this twice). Good for making a keybind for screenshots (you can use another decent apps/scripts, really)  
@@ -16,7 +16,7 @@ It should be noted that the cursor isn't included in screenshots.
 
 #### milestones
 * added user config support (already merged to main)
-* added wayland support (big thanks to [WTechNinja](https://github.com/WTechNinja) ([jump to his repo](https://github.com/WTechNinja/eses/tree/eses-w)) ( the wayland support belongs to WTechNinja )
+* added wayland support (big thanks to [WTechNinja](https://github.com/WTechNinja) ([jump to his repo](https://github.com/WTechNinja/eses/tree/eses-w)) ( the wayland support belongs to WTechNinja ) (already mergen to main)
 
 ### Function
 * --whole
@@ -97,15 +97,15 @@ cd /tmp
 git clone https://github.com/kaonkaon/eses.git
 cd eses
 git checkout beta
-sudo mv eses-beta /usr/local/bin/
-chmod +x /usr/local/bin/eses-beta
+sudo mv eses /usr/local/bin/
+chmod +x /usr/local/bin/eses
 ```
 ##### Using WGET (on /usr/local/bin)
 > man page not included, download it yourself
 ```
-wget https://raw.githubusercontent.com/kaonkaon/eses/beta/eses-beta
-sudo mv eses-beta /usr/local/bin/
-chmod +x /usr/local/bin/eses-beta
+wget https://raw.githubusercontent.com/kaonkaon/eses/beta/eses
+sudo mv eses /usr/local/bin/
+chmod +x /usr/local/bin/eses
 ```
 ##### Rewrite the thing (when Copy Paste is bloat)
 ```
@@ -134,7 +134,7 @@ sudo mandb
 After that, you can use `man eses` to view the man page.
 
 #### Config File
-upon first run, the config file will be generated under `/home/$USER/.config/eses-beta/`
+upon first run, the config file will be generated under `/home/$USER/.config/eses/`
 
 script will automatically generate the directory and config file with default configuration inside if theres no config directory and/or config file. no worry i get you 
 

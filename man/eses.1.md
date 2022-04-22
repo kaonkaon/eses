@@ -27,6 +27,8 @@ Has four different modes, selectable via options.
 **--select_cp**
 : Screenshot selected area / selected window, and put it on clipboard, then run QR code magic. If a QR Code is detected in the screenshot, it will try to scan it. If it fails, it will leave the screenshot on the clipboard, but if it succeeds you will be prompted to copy either the image or the scanned result.
 
+**--help**
+: Show this help screen.
 # EXAMPLES
 **eses --select_cp**
 : Screenshot selected area to clipboard, then run QR code magic.

@@ -8,6 +8,10 @@ How you pronounce "SS"? yeah.
 Basic screenshot script with QR Scanner feature (yes i wrote this twice). Good for making a keybind for screenshots (you can use another decent apps/scripts, really)  
 It should be noted that the cursor isn't included in screenshots.
 
+#### milestones
+* added user config support 
+* added wayland support (big thanks to [WTechNinja](https://github.com/WTechNinja) ([jump to his repo](https://github.com/WTechNinja/eses/tree/eses-w)) ( the wayland support belongs to WTechNinja )
+
 ### Function
 * --whole
 	* Screenshot whole screen and save it as a file in your desired folders (set it yourself by changing the config)
@@ -21,50 +25,63 @@ It should be noted that the cursor isn't included in screenshots.
 			* if it fails, it will leave the screenshot copied on the clipboard
 			* if it succeeds, user will be prompted to copy either the screenshot or scanned result
 			 ![Dialog](https://github.com/kaonkaon/eses/blob/main/me%20when%20dialog.png?raw=true)
-			 
+* --help
+	* Show help page with information on basic usage			
+ 
 ### Configuration
 All of the default configuration is in the beginning of the eses script with plenty of comments, and it will likely change. As of writing this, the default config is:
 
 ```
-# Notification title when maim --hidecursor successfully saved
+# Notification title when a screenshot is saved to disk, or copied to clipboard
 succ_noTit="Kasha!"
 
-# Notification text when maim --hidecursor successfully saved
+# Notification text when a screenshot is captured, and saved to disk
 succ_noTex="Screenshot saved!"
 
-# Notification text when maim --hidecursor successfully saved
+# Notification text when a screenshot is captured, and copied to clipboard
 succ_noTex_cp="Screenshot copied to clipboard!"
 
-# Notification title when QR Scanned and copied
+# Notification title when a QR Code is scanned and copied to clipboard
 succ_noTit_sccop="QR Code scan result"
 
 # Prompt dialog title when qr code scanned
 dia_tit="Prompt"
 
 # Prompt dialog text when qr code scanned
-dia_tex="QR Code detected, and sucessfully scanned\n Do you want to copy the scan result instead?"
+dia_tex="QR Code detected, and sucessfully scanned.\n Do you want to copy the scan result instead?"
 
 # Prompt dialog copy image button
 dia_imgcop_butt="Copy image"
 
-# Prompt dialog copy image button
+# Prompt dialog copy scan result button
 dia_sccop_butt="Copy scan result"
 
-# maim --hidecursor save dir
+# Screenshot save dir
 sv_dir="/home/$USER/Pictures/"
 
-# maim --hidecursor file name
+# Screenshot file name
 sv_name="$(date)"
 ```
 
 ### Dependencies
+> General
 ```
-* zenity
-* maim
-* imagemagick
-* xclip
-* zbarimg
-* notify-send
+zenity
+imagemagick
+notify-send
+zbarimg
+```
+
+> Xorg
+```
+maim
+xclip
+```
+
+> Wayland
+```
+grim
+wl-clipboard
 ```
 
 ### Install
@@ -114,8 +131,8 @@ After that, you can use `man eses` to view the man page.
 #### Config File
 upon first run, the config file will be generated under `/home/$USER/.config/eses/`
 
-script will automatically generate the directory and config file with default configuration inside if theres no config directory and/or config file. no worry i get you 
+the script will automatically generate the directory and config file with default configuration inside if theres no config directory and/or config file. no worry i get you 
 
 
 ## Contribute
-please contribute something, even adding comment is appreciated
+please contribute something, even adding a comment is appreciated.

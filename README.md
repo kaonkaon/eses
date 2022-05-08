@@ -84,10 +84,10 @@ grim
 wl-clipboard
 ```
 
-### Install
+### Install stable version
 just copy it to executable path and make it executable and boom 
 
-##### Using Clone (on /usr/local/bin)
+##### Using git clone (on /usr/local/bin)
 ```
 cd /tmp
 git clone https://github.com/kaonkaon/eses.git
@@ -102,14 +102,36 @@ wget https://raw.githubusercontent.com/kaonkaon/eses/main/eses
 sudo mv eses /usr/local/bin/
 chmod +x /usr/local/bin/eses
 ```
-##### Rewrite the thing (when Copy Paste is bloat)
+### Install specific branch version
+> This is only useful for testing new features, we recommend you stick to the stable version  
+
+go to whichever branch you want, download `eses` and make it executable and put it somewhere
+##### Using git clone (on /usr/local/bin)
+Replace `<placeholder>` with the name of the branch you want, like `beta` or `config`
+```
+cd /tmp
+git clone https://github.com/kaonkaon/eses.git
+cd eses
+git checkout <placeholder>
+sudo mv eses /usr/local/bin/
+chmod +x /usr/local/bin/eses
+```
+##### Using WGET (on /usr/local/bin)
+> man page not included, download it yourself  
+
+Replace `<placeholder>` with the name of the branch you want, like `beta` or `config`
+```
+wget https://raw.githubusercontent.com/kaonkaon/eses/<placeholder>/eses
+sudo mv eses /usr/local/bin/
+chmod +x /usr/local/bin/eses
+```
+##### Rewrite the thing (when Copy and Paste are bloat. Works for any branch)
 ```
 open your favorite text editor
 write the entire thing
 save
 put it in random folder
 ```
-
 #### Building the man page
 > dependencies: pandoc, gzip
 
@@ -131,7 +153,7 @@ After that, you can use `man eses` to view the man page.
 #### Config File
 upon first run, the config file will be generated under `/home/$USER/.config/eses/`
 
-the script will automatically generate the directory and config file with default configuration inside if theres no config directory and/or config file. no worry i get you 
+the script will automatically generate the directory and config file with default configuration inside if there's no config directory and/or config file. no worry i get you 
 
 
 ## Contribute

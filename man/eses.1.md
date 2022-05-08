@@ -36,6 +36,11 @@ Has four different modes, selectable via options.
 **eses --whole**
 : Screenshot whole screen, and save as file.
 
+# CONFIGURATION
+eses stores it's config file at /home/$USER/.config/eses/config.
+If it doesn't exist, the script will automatically generate the directory and config file with default configuration.
+The config file is commented with explanations of what all the variables do.
+
 # BUGS
 https://github.com/kaonkaon/eses
 

@@ -63,6 +63,8 @@ sv_dir="/home/$USER/Pictures/"
 sv_name="$(date)"
 ```
 
+You can configure these settings by creating "config" files under ~/.config/eses/ (it should create the config files automatically)
+
 ### Dependencies
 > General
 ```

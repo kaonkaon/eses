@@ -157,6 +157,7 @@ upon first run, the config file will be generated under `/home/$USER/.config/ese
 
 the script will automatically generate the directory and config file with default configuration inside if there's no config directory and/or config file. no worry i get you 
 
+BUT, sometimes the script be kinda silly and wont create .config file by itself. You can create the config files by yourself under ~/.config/ folder. Refer to Github for the configuration.
 
 ## Contribute
 please contribute something, even adding a comment is appreciated.

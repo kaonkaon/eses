@@ -33,34 +33,36 @@ All of the default configuration is in the beginning of the eses script with ple
 
 ```
 # Notification title when a screenshot is saved to disk, or copied to clipboard
-succ_noTit="Kasha!"
+success_notification="Kasha!"
 
 # Notification text when a screenshot is captured, and saved to disk
-succ_noTex="Screenshot saved!"
+success_notification_text="Screenshot saved!"
 
 # Notification text when a screenshot is captured, and copied to clipboard
-succ_noTex_cp="Screenshot copied to clipboard!"
+success_notification_text_cp="Screenshot copied to clipboard!"
 
 # Notification title when a QR Code is scanned and copied to clipboard
-succ_noTit_sccop="QR Code scan result"
+success_notification_sccpy="QR Code scan result"
 
 # Prompt dialog title when qr code scanned
-dia_tit="Prompt"
+dialog_title="Prompt"
 
 # Prompt dialog text when qr code scanned
-dia_tex="QR Code detected, and sucessfully scanned.\n Do you want to copy the scan result instead?"
+dialog_text="QR Code detected, and sucessfully scanned.\n Do you want to copy the scan result instead?"
 
 # Prompt dialog copy image button
-dia_imgcop_butt="Copy image"
+imgcp_text="Copy image"
 
 # Prompt dialog copy scan result button
-dia_sccop_butt="Copy scan result"
+sccpy_text="Copy scan result"
 
 # Screenshot save dir
 sv_dir="/home/$USER/Pictures/"
 
 # Screenshot file name
-sv_name="$(date)"
+sv_name="Screenshot_$(date +'%Y-%m-%d_%H-%M-%S').png"
+
+
 ```
 
 You can configure these settings by creating "config" files under ~/.config/eses/ (it should create the config files automatically)

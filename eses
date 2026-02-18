@@ -3,34 +3,34 @@
 ## Configuration, will be overridden by config file
 	
 # Notification title when a screenshot is saved to disk, or copied to clipboard
-succ_noTit="Kasha!"
+success_notification="Kasha!"
 
 # Notification text when a screenshot is captured, and saved to disk
-succ_noTex="Screenshot saved!"
+success_notification_text="Screenshot saved!"
 
 # Notification text when a screenshot is captured, and copied to clipboard
-succ_noTex_cp="Screenshot copied to clipboard!"
+success_notification_text_cp="Screenshot copied to clipboard!"
 
 # Notification title when a QR Code is scanned and copied to clipboard
-succ_noTit_sccop="QR Code scan result"
+success_notification_sccpy="QR Code scan result"
 
 # Prompt dialog title when qr code scanned
-dia_tit="Prompt"
+dialog_title="Prompt"
 
 # Prompt dialog text when qr code scanned
-dia_tex="QR Code detected, and sucessfully scanned.\n Do you want to copy the scan result instead?"
+dialog_text="QR Code detected, and sucessfully scanned.\n Do you want to copy the scan result instead?"
 
 # Prompt dialog copy image button
-dia_imgcop_butt="Copy image"
+imgcp_text="Copy image"
 
 # Prompt dialog copy scan result button
-dia_sccop_butt="Copy scan result"
+sccpy_text="Copy scan result"
 
 # Screenshot save dir
 sv_dir="/home/$USER/Pictures/"
 
 # Screenshot file name
-sv_name="$(date)"
+sv_name="Screenshot_$(date +'%Y-%m-%d_%H-%M-%S').png"
 
 ## Overriding Config file (will auto make them)
 
@@ -52,12 +52,12 @@ sv_name="$(date)"
 
 ## Display server checker
 
-	whatDis=0;
+	ds_check=0;
 	
 	if [ $XDG_SESSION_TYPE == 'wayland' ]; then
-		whatDis=0;
+		ds_check=0;
 	else
-		whatDis=1;
+		ds_check=1;
 	fi
 
 	# it will be 0 if wayland and 1 if X11	
@@ -79,7 +79,7 @@ There are four modes, selectable by the below options:
 }
 
 
-if [ $whatDis = "0" ]; then
+if [ $ds_check = "0" ]; then
 	case "$1" in
 		--help)
 			printHelp
@@ -87,15 +87,15 @@ if [ $whatDis = "0" ]; then
 			;;
 		--select)
 			grim -g "$(slurp)" "$sv_dir$sv_name"
-			notify-send -a eses "$succ_noTit" "$succ_noTex"
+			notify-send -a eses "$success_notification" "$success_notification_text"
 			;;
 		--whole)
 			grim "$sv_dir$sv_name"
-			notify-send -a eses "$succ_noTit" "$succ_noTex"
+			notify-send -a eses "$success_notification" "$success_notification_text"
 			;;
 		--whole_cp)
 			grim - | wl-copy -t image/png
-			notify-send -a eses "$succ_noTit" "$succ_noTex_cp"
+			notify-send -a eses "$success_notification" "$success_notification_text_cp"
 			;;
 		--select_cp)
 			tmp_file="/tmp/qr.png"
@@ -106,24 +106,24 @@ if [ $whatDis = "0" ]; then
 
 			if [ -z "$scanresult" ]; then
 				wl-copy -t image/png < $tmp_file
-				notify-send -a eses "$succ_noTit" "$succ_noTex_cp"
+				notify-send -a eses "$success_notification" "$success_notification_text_cp"
 			else
-				ask=$(zenity --question --text="$dia_tex" --title="$dia_tit" --icon-name=info \
-				--no-wrap --ok-label="$dia_sccop_butt" --cancel-label="$dia_imgcop_butt" --ellipsize)
+				ask=$(zenity --question --text="$dialog_text" --title="$dialog_title" --icon-name=info \
+				--no-wrap --ok-label="$sccpy_text" --cancel-label="$imgcp_text" --ellipsize)
 
 				if [ $? = "0" ]; then
 						echo "$scanresult" | wl-copy
 						convert $tmp_file -resize 75x75 "$tmp_file"
-						notify-send -a eses -i "$tmp_file" "$succ_noTit_sccop" "$scanresult"
+						notify-send -a eses -i "$tmp_file" "$success_notification_sccpy" "$scanresult"
 				elif [ $? = "1" ]; then
 						wl-copy -t image/png < $tmp_file
-						notify-send -a eses "$succ_noTit" "$succ_noTex_cp"
+						notify-send -a eses "$success_notification" "$success_notification_text_cp"
 				fi
 			fi
 			;;
 	esac
 
-elif [ $whatDis = "1" ]; then
+elif [ $ds_check = "1" ]; then
 	case "$1" in
 		--help)
 			printHelp
@@ -131,15 +131,15 @@ elif [ $whatDis = "1" ]; then
 			;;
 		--select)
 			maim --hidecursor --select "$sv_dir$sv_name"
-			notify-send -a eses "$succ_noTit" "$succ_noTex"
+			notify-send -a eses "$success_notification" "$success_notification_text"
 			;;
 		--whole)
 			maim --hidecursor "$sv_dir$sv_name"
-			notify-send -a eses "$succ_noTit" "$succ_noTex"
+			notify-send -a eses "$success_notification" "$success_notification_text"
 			;;
 		--whole_cp)
 			maim --hidecursor | xclip -selection clipboard -t image/png
-			notify-send -a eses "$succ_noTit" "$succ_noTex_cp"
+			notify-send -a eses "$success_notification" "$success_notification_text_cp"
 			;;
 		--select_cp)
 			tmp_file="/tmp/qr.png"
@@ -150,16 +150,16 @@ elif [ $whatDis = "1" ]; then
 
 			if [ -z "$scanresult" ]; then
 				xclip -selection clipboard -t image/png $tmp_file
-				notify-send -a eses "$succ_noTit" "$succ_noTex_cp"
+				notify-send -a eses "$success_notification" "$success_notification_text_cp"
 			else
-				ask=$(zenity --question --text="$dia_tex" --title="$dia_tit" --icon-name=info --no-wrap --ok-label="$dia_sccop_butt" --cancel-label="$dia_imgcop_butt" --ellipsize)
+				ask=$(zenity --question --text="$dialog_text" --title="$dialog_title" --icon-name=info --no-wrap --ok-label="$sccpy_text" --cancel-label="$imgcp_text" --ellipsize)
 				if [ $? = "0" ]; then
 					echo "$scanresult" | xclip -selection clipboard -filter
 					convert $tmp_file -resize 75x75 "$tmp_file"
-					notify-send -a eses -i "$tmp_file" "$succ_noTit_sccop" "$scanresult"
+					notify-send -a eses -i "$tmp_file" "$success_notification_sccpy" "$scanresult"
 				elif [ $? = "1" ]; then
 					xclip -selection clipboard -t image/png $tmp_file
-					notify-send -a eses "$succ_noTit" "$succ_noTex_cp"
+					notify-send -a eses "$success_notification" "$success_notification_text_cp"
 				fi
 			fi
 			;;
